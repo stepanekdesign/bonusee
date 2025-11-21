@@ -9,6 +9,7 @@ import { AuthModal } from './components/AuthModal';
 import { UpgradeView } from './components/UpgradeView';
 import { SettingsModal } from './components/SettingsModal';
 import { GlassCard } from './components/GlassCard';
+import { DemoBanner } from './components/DemoBanner';
 import { dbService, authStateListener, logoutUser, deleteUserAccount } from './services/firebase';
 import { Plus, Home as HomeIcon, Compass, Archive, Menu, Settings, User, Bell, Shield, CircleHelp, LogOut, Crown, Star, ArrowRight, Lock } from 'lucide-react';
 
@@ -440,13 +441,14 @@ export default function App() {
 
   return (
     <>
+      <DemoBanner />
       <Background />
       
-      <main className="max-w-md mx-auto min-h-screen relative px-4">
+      <main className="max-w-md mx-auto min-h-screen relative px-4 pb-safe">
         {renderView()}
 
         {/* Navigation Bar */}
-        <div className="fixed bottom-6 left-4 right-4 max-w-md mx-auto z-40">
+        <div className="fixed bottom-6 left-4 right-4 max-w-md mx-auto z-40 pb-[env(safe-area-inset-bottom)]">
            <nav className="bg-white/80 backdrop-blur-2xl border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl h-20 flex items-center justify-between px-2 relative">
               
               <div className="flex items-center justify-between w-full px-2">
