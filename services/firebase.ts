@@ -232,13 +232,14 @@ export const registerUser = async (email: string, password: string, name: string
       isPremium: false
     };
     
-    // In a real mock scenario, we'd store the password, but here we just store the session
-    localStorage.setItem('bonusee-user', JSON.stringify(newUser));
-    
     // Store "registered" users so login works for this specific email in mock mode
     const usersDB = JSON.parse(localStorage.getItem('bonusee-users-db') || '{}');
-    usersDB[email] = { ...newUser, password }; // storing password in plain text ONLY for local mock dev
+    // Note: We store password in plain text ONLY for this local demo mode to allow the login flow to work.
+    usersDB[email] = { ...newUser, password }; 
     localStorage.setItem('bonusee-users-db', JSON.stringify(usersDB));
+    
+    // Auto-login after register
+    localStorage.setItem('bonusee-user', JSON.stringify(newUser));
 
     console.log(`[MOCK] Email sent to ${email}: "Welcome to Bonusee, ${name}! Please verify your account."`);
     
@@ -262,8 +263,8 @@ export const loginUser = async (email: string, password: string): Promise<UserPr
       localStorage.setItem('bonusee-user', JSON.stringify(userProfile));
       return userProfile;
     } else {
-       // If exact match not found in mock DB, throw error unless it's a specific test case
-       throw new Error("Invalid email or password (Mock Mode: did you Sign Up first?)");
+       // If exact match not found in mock DB, try "demo" check or throw
+       throw new Error("Invalid email or password. (Demo Mode: Did you Sign Up first?)");
     }
   }
 };
