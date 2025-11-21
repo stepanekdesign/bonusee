@@ -1,0 +1,8 @@
+{
+  "name": "Bonusee",
+  "description": "A liquid-glass style loyalty and habit tracker inspired by iOS design principles.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
